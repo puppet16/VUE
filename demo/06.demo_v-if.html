@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+</head>
+<body>
+
+    <!-- 条件渲染 v-if -->
+    <div id="app">
+        {{msg}}
+        <h1>show:{{web.show}}</h1>
+        <h2>count:{{web.count}}</h2>
+
+        <button @click="toggle">切换显示状态</button> <br>
+        <button @click="add(1000)">加值</button> <br>
+
+
+        <!-- v-show 只是通过 display属性控制标签不显示，但还在DOM树里 -->
+        <h2 v-show="web.show">{{web.url}}</h2>
+        <!-- v-if 是会把标签从DOM树里删除
+            因此，频繁显示隐藏用 v-show，几次显示隐藏可以用v-if 
+        -->
+        <h2 v-if="web.show">{{web.title}}</h2>
+        <hr>
+
+        <!-- v 的 if else 示例 -->
+        <p v-if="web.count < 1000">新网站</p>
+        <p v-else-if="web.count < 5000">优秀网站</p>
+        <p v-else=>资深网站</p>
+
+    </div>
+
+    <script type="module">
+        import {createApp, reactive} from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                // v-on 用于将函数绑定到事件
+                // 可用 @ 替代v-on:
+                const web = reactive({
+                    show: true,
+                    title:"puppet",
+                    url:"www.baidu.com",
+                    count: 500
+                })
+
+                const toggle = () => {
+                    web.show = !web.show
+                }
+
+                const add = (a) => {
+                    web.count+=a
+                }
+
+                return {
+                    msg:"success",
+                    web,
+                    toggle,
+                    add
+                }
+            }
+        }).mount("#app")
+
+
+    </script>
+</body>
+</html>

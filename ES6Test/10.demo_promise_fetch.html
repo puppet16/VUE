@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+    <script>
+        // Promise 表示承诺在未来的某个时刻可能会完成并返回结果
+        // 对于某些需要时间来处理结果的操作，如用户登录、读取文件等，可以使用Promise对象来执行异步操作
+        // 当Prmoise 创建时，它的初始状态为pending，表示异步任务执行还未完成
+        // 当执行成功，会调用 resolve函数把Promise对象的状态改变为 fulfilled，可以通过 then 方法来获取异步操作的结果
+        // 当执行异常，会调用 reject 函数把Promise对象的状态改为 rejected，可以通过catch方法来处理错误
+
+        let promise = new Promise((resolve, reject) => {
+            // resolve(323)    
+            reject("报错")
+        })
+        console.log("promise",promise);
+        promise.then(result => {
+            console.log("result", result);
+        }).catch(reason => {
+            console.log("error", reason);
+        }).finally(() => {
+            console.log("异步执行结束");
+        })
+        
+
+        // Fetch
+        // fetch 是基于 Promise 的 API, 它可以发送http 请求并接收服务器返回的响应数据
+        // fetch 返回的是一个 Promise 对象
+
+        // get 请求
+
+        let getUrl = "https://dog.ceo/api/breeds/image/random"
+        fetch(getUrl).then(response => {
+            // 返回的解析后的json 数据会传递给下一个 then() 方法的回调函数作为参数
+            // 这个参数就是 data 
+            console.log(typeof response);
+            return response.json()
+        }).then(data => {
+            // 解析后的json 数据
+            console.log("get.data", data , typeof data);
+        }).catch(error => {
+            console.log("get.error", error, typeof error);
+        }).finally(() => {
+            console.log("get finally");
+        })
+
+
+        // post 请求
+        let postUrl = "www.baidu.com"
+        fetch(getUrl, {
+            method:"post",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({
+                // URLSearchParams 用于处理键值对类型的数据，并将其编码为 url 查询字符串
+                name:"Lee",
+                search:"18"
+            })
+
+        }).then(response => {
+            // 返回的解析后的json 数据会传递给下一个 then() 方法的回调函数作为参数
+            // 这个参数就是 data 
+            console.log(typeof response);
+            return response.json()
+        }).then(data => {
+            // 解析后的json 数据
+            console.log("post.data", data , typeof data);
+        }).catch(error => {
+            console.log("post.error", error, typeof error);
+        }).finally(() => {
+            console.log("post finally");
+        })
+
+        fetch(getUrl, {
+            method:"post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // JSON.stringify 用于将对象转换为 json 字符串
+                name:"Lee",
+                search:"18"
+            })
+
+        }).then(response => {
+            // 返回的解析后的json 数据会传递给下一个 then() 方法的回调函数作为参数
+            // 这个参数就是 data 
+            console.log(typeof response);
+            return response.json()
+        }).then(data => {
+            // 解析后的json 数据
+            console.log("post.data", data , typeof data);
+        }).catch(error => {
+            console.log("post.error", error, typeof error);
+        }).finally(() => {
+            console.log("post finally");
+        })
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

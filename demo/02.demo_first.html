@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块式</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+
+        <h1>{{web.title}}</h1>
+        <h2>{{web.url}}</h2>
+    </div>
+    <script type="module">
+        // 模块开发
+        // 与传统开发区别：本地路径无法正常获取值，需要安装 live server 插件
+        // 解构赋值
+        import {createApp, reactive} from "./js/vue.esm-browser.js"
+
+        createApp({
+            // setup选项 用于设置响应式数据和方法
+            setup() {
+                const web = reactive({
+                    title: "Puppet",
+                    url:"www.baidu.com"
+                })
+
+                return {
+                    msg: "success",
+                    web
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

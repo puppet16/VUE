@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deconstruct</title>
+</head>
+<body>
+    <script>
+        // 解构 可以从数组或对象中提取值并赋给变量
+        
+        // 数组解构用中括号
+
+        let [x,y] = [1,2]
+        console.log(x, y);
+        
+        // 解析定义的变量比值多，多出来的变量没有值
+        let [x1,y1, z1] = [1,2]
+        console.log(x1, y1,z1);
+
+
+        // 逗号就略过
+        let [,,c] = [10, 20, 30]
+        console.log("c", c);
+
+        // 用扩展函数三个点，可以解构部分数组给一个变量
+        let [A, ...B] = [1,2,3,4,5,6]
+        console.log("A", A, typeof A, "B", B, typeof B);
+
+        // 解析同时默认值
+        let [x2 = 10,y2 = 20, z2 = 30] = [1,2]
+        console.log("x2", x2,"y2", y2,"z2", z2);
+
+        // 解构实际使用一：两数对换
+
+        let x3 = 5
+        let y3 = 10; // 重点，这个分号必须加，否则报错的
+
+        [x3, y3] = [y3, x3]
+        console.log("x3", x3, "y3", y3);
+
+        // 对象解构 用大括号
+
+        let person ={
+            name : "Lee",
+            age : 18,
+            height : 185
+        }
+
+        // 解构某个属性
+
+        let {name} = person
+
+        console.log("name", name);
+
+        // 不能重新声明块作用域里的变量name，对其使用冒号以重命名
+        let {name:userName, age} = person
+        console.log("userName", userName, "age", age);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

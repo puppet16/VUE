@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 变量字符串
+        let name = "LEE"
+        let age = 326.2
+        console.log(name)
+        console.log(typeof name)
+        console.log(typeof age)
+
+        // 常量
+        const PI = 3.1415926
+        console.log(PI)
+        name = "李"
+        console.log(name)
+
+        // 布尔型
+        let tv = true
+        console.log(tv, typeof tv)
+
+        // 对象
+        let person= {
+            name:"Lee",
+            age:18,
+            weight:101.1
+        }
+        console.log(person, typeof person)
+
+        // map 取值用get方法
+        let map = new Map([
+            ["name","李"],
+            ["age",18]
+        ])
+        console.log(map, map.get("name"), typeof map)
+
+        // set 有去除性
+        let set = new Set([1,2,3,"2",1,2])
+        console.log(set, typeof set)
+
+        // array取值用中括号
+        let arr = [1,2,3,"3", 4]
+        console.log(arr, typeof arr)
+        console.log(arr[0], typeof arr)
+
+        // 函数
+        function add(x, y) {
+            return x + y
+        }
+        let result = add(20, 30)
+        console.log(result, typeof add)
+
+        // 类 class
+        class Persion {
+            constructor(userName, userAge) {
+                this.name = userName
+                this.age = userAge
+            }
+             info() {
+                console.log(this.name, this.age)
+            }
+
+        }
+
+        let person1 = new Persion("李", 18)
+        person1.info()
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

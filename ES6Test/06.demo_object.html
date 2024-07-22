@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let teacher ={
+            name:"Lee",
+            age:18,
+            gender:"男"
+        }
+
+        console.log(teacher);
+
+        // 对象添加元素
+        teacher.height = 185
+        console.log(teacher);
+
+        // 修改元素
+        teacher.name = "李"
+        console.log(teacher);
+
+        // 删除
+        delete teacher.gender
+        console.log(teacher);
+
+        // 包含 重点
+        let has = "name" in teacher
+        console.log("包含 name", has);
+
+        // 对象属性名数组，元素类型为字符串
+        let keys = Object.keys(teacher)
+        console.log(keys, "keys 元素类型", typeof keys[0]);
+
+        // 对象转换为数组， 数组元素是对象类型
+        let arr = Object.entries(teacher)
+        console.log(arr, "元素类型", typeof arr[0]);
+
+        // 循环
+        // for..of 用于遍历可迭代对象，如 Set、Map、数组、字符串
+        // for..in 用于遍历对象的可枚举属性
+
+        for (const key in teacher) {
+            console.log("for..in", key, teacher[key]);
+        }
+
+
+        Object.entries(teacher).forEach((value, index) => {
+            console.log(value, index);
+        })
+
+        // 记得解构啊
+        Object.entries(teacher).forEach(([key,value],index) => {
+            console.log("key",key, "value",value, "index", index);
+        })
+
+        // 清空
+        teacher={}
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

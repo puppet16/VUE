@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        // 类的私有属性, 需在属性定义的位置和使用的位置前面加个#
+        class Person {
+            name
+            #age
+            constructor(name, age) {
+                this.name = name
+                this.#age = age
+            }
+
+            info() {
+                return "姓名："+ this.name + "年龄：" + this.age
+            }
+
+            info2() {
+                return `姓名：${this.name} 年龄：${this.#age}`
+            }
+
+            // 若想在类外使用私有属性 添加get方法
+            // 使用get 关键字定义的函数表示是这个类的一个属性，调用的时候不用加小括号
+             web() {
+                return this.#age
+            }
+
+            // get age() {
+            //     return this.#age
+            // }
+
+            set age(value) {
+                this.#age = value
+            }
+
+            setWeb(value) {
+                this.#age = value
+            }
+        }
+
+        let person = new Person("Lee", 18)
+        console.log(person, person.age, person.web());
+        person.age = 20
+        console.log(person, person.age, person.web());
+
+        person.setWeb(30)
+        console.log(person, person.age, person.web());
+
+        // 模板字符串 用 ``当分隔符，内里需要计算的参数用${}包裹
+
+        console.log(person.info())
+
+        console.log(person.info2())
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

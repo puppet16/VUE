@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        // 1. 下载 axios
+        // 网络请求框架 axios
+        // 替换npm 的镜像文件
+        // 获取： npm get registry 
+        // 结果：https://registry.npmjs.org/
+        // 替换：npm config set registry https://registry.npmmirror.com/
+
+        // 使用 npm 下载axios, 在目标目录下运行如下命令
+        // npm install axios 
+        // 下载成功后会看到下载了很多和axios相关的内容，如果只想要axios
+        // 可以查看 axios 使用的 CDN
+        // <script src="https://unpkg.com/axios/dist/axios.min.js">
+        // 根据目录找到axios.min.js，这个才是单纯的 axios 
+
+
+        // 2. 学习 axios
+        // axios 是基于 Promise 的网络请求库， 它可以发送 http 请求并接收服务器返回的响应数据
+        // axios 返回的是一个 Promise 对象
+        // axios 不仅可以用于浏览器， 也可以用于 Node.js, 而Fetch 主要用于浏览器
+
+        let getUrl = "https://dog.ceo/api/breeds/image/random"
+        
+        // get 请求
+        axios.get(getUrl).then(response => {
+            // 与 fetch 相比，不需要再手动转换数据
+            console.log("get.data", response.data);
+        }).catch(error => {
+            console.log("get.data error");
+        }).finally(() => {
+            console.log("get.finally");
+        })
+
+        // post 请求
+        let data ={
+            // 参数
+            name: "Lee",
+            age: 18
+        }
+        // 传入的数据也不需要进行转换
+        axios.post(getUrl, data, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then(response => {
+            // 解析后的json 数据
+            console.log("post.data", response.data);
+        }).catch(error => {
+            console.log("post.error", error, typeof error);
+        }).finally(() => {
+            console.log("post finally");
+        })
+
+        // axios 的默认请求头就是 application/json
+        axios.post(getUrl, data).then(response => {
+            // 解析后的json 数据
+            console.log("post.data", response.data);
+        }).catch(error => {
+            console.log("post.error", error, typeof error);
+        }).finally(() => {
+            console.log("post finally");
+        })
+        
+
+    </script>
+</body>
+</html>

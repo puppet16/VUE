@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        // set 集合 
+        let set = new Set(["one", "two", "three"])
+        function logSet() { console.log(set)}
+        logSet()
+
+        // 添加元素
+        set.add("four")
+        logSet()
+        
+        // 删除元素
+        set.delete("two")
+        logSet()
+
+        // 是否包含
+        set.has('three')
+
+        // 数量
+        set.size
+
+        // 转换数组
+        let arr = Array.from(set)
+        console.log(arr);
+
+        // 扩展运算符 展示可迭代对象
+
+        let str = "君不见黄河之水huahuahua"
+
+        let arr2 = [...str]
+        console.log("扩展字符串", arr2);
+
+        let arr3 = [...arr]
+        console.log("扩展数组", arr3);
+
+        let arr4 = [...set]
+        console.log("扩展set", arr4);
+
+        // 循环 for of
+
+        for(let item of set) {
+            console.log("for of", item);
+        }
+        set.forEach(element => {
+            console.log("forEach", element);
+
+        });
+
+        // set集合的索引下标还是它自身
+        set.forEach((element, index) => {
+            console.log("forEach", element, index);
+
+        });
+        
+        arr4.forEach( value => {
+            console.log("数组", value);
+        })
+
+        arr4.forEach( (value, index) => {
+            console.log("数组", value, index);
+        })
+
+        // 数组去重
+        let arr5 = [1,2,3,4,1,2,5,1,7,6,5]
+        console.log("数组", arr5);
+        let arrSet = new Set(arr5)
+        console.log("去重", arrSet);
+
+    </script>
+</body>
+</html>

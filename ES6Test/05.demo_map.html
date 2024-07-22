@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 集合的键值唯一
+        let log = () => {
+            console.log(teacher);
+        }
+
+        let teacher = new Map([
+            ["name", "Lee"],
+            ["gender", "男"],
+            ["phone", 138138381]
+        ])
+        
+        log()
+
+        // 添加和修改
+        teacher.set("height", 185)
+        teacher.set("name", "李")
+        log()
+
+        // 删除
+        teacher.delete("gender")
+        log()
+
+        // 包含
+        console.log(teacher.has("name"));
+        
+        // 大小 注意size 是属性不是方法
+        console.log(teacher.size);
+
+
+        // 转换为数组, 数组元素是对象
+        let arr = Array.from(teacher)
+        console.log("变数组",arr, typeof arr[0]);
+
+        // 扩展
+        let arr2 = [...teacher]
+        console.log("扩展",arr2);
+
+
+        // 循环 解构
+        for (let [key, value] of teacher) {
+            console.log(key, value);
+        }
+
+        // 不解构
+        for(let entry of teacher) {
+            console.log("不解构", entry, typeof entry);
+        }
+
+        teacher.forEach((value, key) => {
+            console.log(key, typeof key);
+            console.log(value, typeof value);
+        })
+
+        // 清空
+        teacher.clear()
+        console.log(teacher.size);
+
+
+
+
+
+
+    </script>
+</body>
+</html>

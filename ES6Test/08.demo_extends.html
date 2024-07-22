@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>extends</title>
+</head>
+<body>
+    <script>
+        class Person {
+            name
+            age
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+
+            sleep() {
+                return `${this.name} 休息中...`
+            }
+        }
+
+
+        class GoodBoy extends Person {
+            height
+            constructor(name, age, height) {
+                super(name, age)
+                this.height = height
+            }
+
+            eat() {
+                return `${this.name} 正在吃...`
+            }
+
+        }
+
+
+        let boy = new GoodBoy("Lee", 18, 100)
+
+        console.log(boy.name);
+        console.log(boy.eat());
+        console.log(boy.sleep());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

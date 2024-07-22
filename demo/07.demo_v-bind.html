@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind</title>
+    <style>
+        .textColor {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 单向动态属性绑定 -->
+        {{msg}}
+        <h1>show:{{web.show}}</h1>
+        <button @click="toggle">切换显示状态</button> <br>
+
+        <hr>
+        
+        <!-- :value -->
+        <h3>value=www.baudu.com</h3>
+        <input type="text" value="www.baidu.com">
+
+        <h3>v-bind:value</h3>
+        <input type="text" v-bind:value="web.url">
+
+        <h3>:value</h3>
+        <input type="text" :value="web.url">
+        <hr>
+
+        <!-- :src -->
+        <h3>src=./pic/dogs.jpg</h3>
+        <img height="200" width="300" src="./pic/dogs.jpg">
+
+        <h3>:scr</h3> 
+        <img height="200" width="300" :src="web.img">
+        <hr>
+        
+        <!-- :class -->
+        <h3>class="textColor"</h3>
+        <b class="textColor">Test</b>
+
+        <h3>:class="{textColor:web.show}"</h3>
+        <b :class="{textColor:web.show}">Test</b>
+
+        <hr>
+
+    </div>
+
+    <script type="module">
+        import {createApp, reactive} from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                const web = reactive({
+                    show: true,
+                    title:"puppet",
+                    img:"./pic/dogs.jpg",
+                    url:"www.baidu.com",
+                    count: 500
+                })
+
+                const toggle = () => {
+                    web.show = !web.show
+                }
+
+                const add = (a) => {
+                    web.count+=a
+                }
+
+                return {
+                    msg:"success",
+                    web,
+                    toggle,
+                    add
+                }
+            }
+        }).mount("#app")
+
+
+    </script>
+</body>
+</html>

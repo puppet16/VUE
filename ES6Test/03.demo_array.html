@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Array</title>
+</head>
+<body>
+    <script>
+        // 定义数据
+        let arr = [5,6]
+        console.log(arr, typeof arr)
+
+        //push 末尾添加元素，并返回修改后的数组长度
+        let arrLength = arr.push(2, 3)
+        console.log(arrLength, arr, typeof arr)
+
+        // unshift 开头添加元素，并返回修改后的数组长度
+        let arrLength2 = arr.unshift(1,1)
+        console.log(arrLength2, arr, typeof arr)
+        
+        // shift 删除第一个元素，并返回这个元素
+        let first = arr.shift()
+        console.log(first, arr, typeof arr)
+
+        // pop 删除第最后一个元素，并返回这个元素
+        let end = arr.pop()
+        console.log(end , arr, typeof arr)
+
+        // 删除指定下标范围的元素，并返回这个范围的元素
+        // 第二个值指的数量
+        let delArr = arr.splice(1,1)
+        console.info("splice",delArr, arr)
+        let delArr2 = arr.splice(2,3)
+        console.info("splice2",delArr2, arr)
+
+        // 反转列表
+        arr.reverse()
+        console.log(arr)
+
+        // 排序：按字符串首字母排序
+        let arr2 = ["bba","cde", "bab","abc"]
+        arr2.sort()
+        console.info("排序", arr2)
+        let arr3 = [5, 20, 32, 31, 3, 4]
+        arr3.sort()
+        console.info("以字母排序", arr3)
+
+        // 自定义排序规则：
+        // 比较函数(a,b) => a- b,接收两个参数，用于比较两个元素大小，返回结果决定排序顺序
+        // a < b, a-b 是一个负数，表示a在b 前面
+        // a > b, a-b 是一个正数，表示 a 在 b 后面
+        // a = b, a-b 是 0， 位置不变
+        arr3.sort((a,b) => a - b)
+        console.info("添加了排序规则升序", arr3)
+
+        arr3.sort((a,b) => b - a)
+        console.info("降序", arr3)
+
+        // 筛选
+        
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

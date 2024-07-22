@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+</head>
+<body>
+
+    <div id="app">
+        {{msg}}
+        <h1>{{web.title}}</h1>
+        <h2>{{web.url}}</h2>
+        <h2>{{web.count}}</h2>
+    
+        <button v-on:click="edit">修改</button> <br>
+        <button @click="edit">修改-简写</button> <hr>
+
+        <!--
+            keyup 是在用户松开按键时才触发
+            keydown 是在用户按下按键时立即触发
+            enter space tab 是按钮修饰符
+        -->
+        回车 <input type="text" @keyup.enter="add(1,1)" @keydown.delete="clear()"><br>
+        空格 <input type="text" @keyup.space="add(2,2)"><br>
+        Tab  <input type="text" @keydown.tab="add(3,3)"><br>
+        W    <input type="text" @keydown.w="add(4,4)"><br>
+        del  <input type="text" @keydown.delete="clear()"><br>
+        <!-- 组合快捷键 -->
+        Ctrl+Enter <input type="text" @keyup.ctrl.enter="add(5,5)"><br>
+        Ctrl+A     <input type="text" @keyup.ctrl.a="add(6,6)"><br>
+
+    </div>
+
+    <script type="module">
+        import {createApp, reactive} from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                // v-on 用于将函数绑定到事件
+                // 可用 @ 替代v-on:
+                const web = reactive({
+                    title:"puppet",
+                    url:"www.baidu.com",
+                    count:0
+                })
+
+                const edit = () => {
+                    web.url = "www.huawei.com"
+
+                }
+
+                const add =(a,b) => {
+                    web.count += a+b
+                }
+
+                const clear= () => {
+                    web.count= 0
+                }
+
+                return {
+                    msg:"success",
+                    web,
+                    edit,
+                    add,
+                    clear
+                }
+            }
+        }).mount("#app")
+
+
+    </script>
+</body>
+</html>

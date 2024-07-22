@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- v-for 遍历数据或对象 -->
+        {{msg}}
+        <h1>data:{{data}}</h1>
+        <hr>
+        <h2>遍历数组</h2>
+        <ul>
+            <li v-for="value in data.number">
+                {{value}}
+            </li>
+        </ul>
+        <h2>遍历数组带下标</h2>
+        <ul>
+            <li v-for="(value,index) in data.number">
+                index => {{index}} value => {{value}}
+            </li>
+        </ul>
+
+        <h2>遍历对象</h2>
+        <ul>
+            <li v-for="(value, key) in data.user">
+                key => {{key}} <br> value => {{value}}
+            </li>
+        </ul>
+
+        <h2>遍历对象带索引</h2>
+        <ul>
+            <li v-for="(value, key, index) in data.user">
+                index => {{index}} <br>
+                key => {{key}} <br> value => {{value}}
+            </li>
+        </ul>
+
+        <h2>遍历对象获取满足条件的数据</h2>
+        <ul>
+            <template v-for="(value, key, index) in data.user">
+                <li v-if="index==1">
+                    index => {{index}} <br>
+                    key => {{key}} <br>
+                    value => {{value}}
+                </li>
+            </template>
+        </ul>
+
+        <h2>遍历对象数组,动态数据绑定title、key</h2>
+        <ul>
+            <li v-for="(value, index) in data.teacher" :title="value.name" :key="value.id">
+                index => {{index}} <br>
+                value => {{value}} <br>
+                id=>{{value.id}}  name=>{{value.name}}  url=>{{value.url}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="module">
+        import { createApp, reactive } from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                const data = reactive({
+                    show: true,
+                    number: ["一", "二", "三", "四"],// 数组
+                    user: {// 对象
+                        name: "Lee",
+                        gender: "男"
+                    },
+                    teacher: [// 包含两个对象的数组
+                        { id: 100, name: "李", url: "www.badu.com" },
+                        { id: 200, name: "刘", url: "www.huawei.com" }
+                    ]
+                })
+
+                return {
+                    msg: "success",
+                    data
+                }
+            }
+        }).mount("#app")
+
+
+    </script>
+</body>
+
+</html>

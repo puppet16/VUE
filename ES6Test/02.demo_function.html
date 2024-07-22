@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 定义函数
+        function getWeb() {
+            console.log("github.io")
+        }
+
+        // 返回值
+        function getWeb2() {
+            return "github.io"
+        }
+        console.log(getWeb2())
+
+        // 传参
+        function add(num) {
+            return num + 10
+        }
+        console.log(add(2))
+
+        // 默认值
+        function getPage(page = 2) {
+            return page + 10
+        }
+        console.log(getPage())
+        console.log(getPage(20))
+
+        // 匿名函数
+
+        let sub = function(x, y) {
+            return x + y
+        }
+        console.log(sub(2,3), typeof sub)
+
+        // 箭头函数
+
+        let plus = (a,b) => {
+            return a + b
+        }
+        console.log(plus(3,3), typeof plus)
+
+        // 隐式返回，在函数体内只有一个表达式的情况下，
+        // 可以省略花括号{}和return 关键字
+
+        let plus2 = (a,b)=> a+b
+
+        console.log(plus2(3,4))
+
+
+    </script>
+</body>
+</html>

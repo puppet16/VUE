@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+</head>
+<body>
+
+    <div id="app">
+        {{msg}}
+        <h1>{{web.show}}</h1>
+        <!-- v-show 用于判断是否显示 -->
+        <h2 v-show="web.show">{{web.url}}</h2>
+        <hr>
+        <button @click="toggle">切换显示状态</button> <br>
+
+    </div>
+
+    <script type="module">
+        import {createApp, reactive} from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                // v-on 用于将函数绑定到事件
+                // 可用 @ 替代v-on:
+                const web = reactive({
+                    show: true,
+                    url:"www.baidu.com"
+                })
+
+                const toggle = () => {
+                    web.show = !web.show
+                }
+
+                return {
+                    msg:"success",
+                    web,
+                    toggle
+                }
+            }
+        }).mount("#app")
+
+
+    </script>
+</body>
+</html>
