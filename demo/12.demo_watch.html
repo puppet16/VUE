@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch</title>
+</head>
+
+<body>
+    <div id="app">
+        爱好
+        <select v-model="hobby">
+            <option value="">请选择</option>
+            <option value="1">写作</option>
+            <option value="2">画画</option>
+            <option value="3">运动</option>
+        </select>
+        <hr>
+
+        年
+        <select v-model="date.year">
+            <option value="">请选择</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+        </select>
+
+        月
+        <select v-model="date.month">
+            <option value="">请选择</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+    </div>
+
+
+    <script type="module">
+        import { createApp, ref, reactive, watch, watchEffect } from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                const hobby = ref("")// 爱好
+                const date = reactive({  // 日期
+                    year: 2024,
+                    month: 2
+                })
+
+                watch(hobby, (newValue, oldValue) => {
+                    console.log("newValue", newValue, "oldValue", oldValue);
+                    if (newValue == "2") {
+                        console.log("画画");
+                    }
+                })
+
+                // 监听 date
+
+                watch(date, (newValue, oldValue) => {
+                    /**
+                     * JS中对象和数组是通过引用传递的，而不是通过值传递
+                     * 当修改对象或数组的值时，实际上修改的是对象或数组的引用，而不是创建一个新的对象或数组
+                     * 所以，如果修改对象或数据的值，那么打印出来的结果是修改后的值
+                     **/
+                     console.log("oldValue", oldValue, "newValue", newValue);
+                    if(newValue.year == "2025") {
+                        console.log("2025");
+                    }    
+
+                    if(newValue.month == "11") {
+                        console.log("十一月");
+                    }
+                })
+
+                // 监听 date 中的某个属性 year
+
+                watch(() => date.year, (newValue, oldValue) => {
+                    console.log("oldValue", oldValue, "newValue", newValue);
+                    if (date.year == "2024") {
+                        console.log("2024年");
+                    }
+                })
+
+                /**
+                 * watch 需要显示指定要监听的属性，并且只有当监听的属性发生变化时才会执行
+                 * 若需要更精细地控制或需要获取到原值，需要使用 watch
+                 **/
+                
+                // 自动监听 watchEffect，不需要指定监听属性，会自动监听在effect里使用的属性，有改变就会调用一次
+
+                watchEffect(()=> {
+                    console.log("===================监听开始============");
+                    if(hobby.value == "1") {
+                        console.log("写作");
+                    }
+
+                    if(date.year =="2024") {
+                        console.log("2024年");
+                    }
+
+                    if(date.month == "12") {
+                        console.log("十二月");
+                    }
+
+                    console.log("===================监听结束============");
+
+                })
+
+
+                return {
+                    hobby,
+                    date
+                }
+            }
+        }).mount("#app")
+
+
+
+
+    </script>
+</body>
+
+</html>
