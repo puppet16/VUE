@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopCar</title>
+    <style>
+        table {
+            width: 600px;
+            color: #8f8e8e;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        table thead {
+            background: #F5F5F5;
+        }
+        table tr {
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ececec;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 实现购物车全选、添加商品、删除单个商品的功能 -->
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <!-- 监听选中状态，与selected值建立双向绑定， 监听状态改变事件，用于执行全选操作 -->
+                    <td><input type="checkbox" v-model="data.selected" @change="selectAll"></td>
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td>库存</td>
+                    <td colspan="2">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(value, index) in data.list">
+                    <!-- :value 是将复选框值与列表里的数据绑定
+                         v-model 绑定的是复选框的选中状态，选中了更新 checkboxList值，将复选框值添加到checkboxList里
+                         change 事件 用于在复选框的选中状态发生改变时触发相应的事件处理函数 -->
+                    <td><input type="checkbox" :value="value" v-model="data.checkboxList" @change="checkSelectAll"></td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.price}}</td>
+                    <td>{{value.stock}}</td>
+                    <td>
+                        <button>-</button>
+                        {{value.number}}
+                        <button>+</button>
+                    </td>
+                    <td><button>删除</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>总价</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script type="module">
+        import { createApp, reactive } from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+
+                const data = reactive({
+                    selected: false,
+                    checkboxList: [],
+                    list: [
+                        {
+                            id: 1,
+                            name: "铅笔",
+                            price: 10,
+                            number: 1,
+                            stock: 3
+                        },
+                        {
+                            id: 2,
+                            name: "钢笔",
+                            price: 20,
+                            number: 3,
+                            stock: 5
+                        },
+                        {
+                            id: 3,
+                            name: "毛笔",
+                            price: 30,
+                            number: 1,
+                            stock: 6
+                        }]
+                })
+
+                // 全选按钮的状态改变
+                const selectAll = () => {
+                    console.log("data.selected", data.selected);
+                    if (data.selected) {
+                        data.checkboxList = data.list
+                    } else {
+                        data.checkboxList = []
+                    }
+                    console.log("data.checkBoxList",data.checkboxList);
+                }
+
+                // 某项复选框改变时，判断全选状态是否还是全选
+                const checkSelectAll = () => {
+                    if (data.checkboxList.length == data.list.length && data.list.length != 0) {
+                        data.selected = true
+                    } else {
+                        data.selected = false
+                    }
+                }
+
+                return {
+                    data,
+                    selectAll,
+                    checkSelectAll
+                }
+            }
+        }).mount("#app")
+    </script>
+
+
+
+
+
+</body>
+
+</html>
