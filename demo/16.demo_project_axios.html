@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios-search</title>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <select v-model="data.type">
+            <option v-for="(item,index) in originData.typeList" :value="item">{{item}}</option>
+        </select>
+
+        <select v-model="data.subType">
+            <option v-for="(item,index) in originData.subTypeList" :value="item">{{item}}</option>
+
+        </select>
+        
+        <!-- 列表展示 -->
+        <!-- <ul>
+            <li v-for="(value,index) in data.list">
+                {{index}}   {{value}}  <button @click="del(index)">删除</button>
+            </li>
+        </ul> -->
+        
+    </div>
+    <script type="module">
+        import {createApp, reactive, watch} from "./js/vue.esm-browser.js"
+        createApp({
+            setup() {
+                const originData = reactive({
+                    url:"",
+                    typeList: [
+                        "品种",
+                        "数量"
+                    ],
+
+                    numberList: [
+                        1,2,3,4,5
+                    ],
+                    breedList:[
+                        "Basenji",
+                        "Dingo",
+                        "Doberman",
+                        "Great Dane",
+                        "Norwegian Elkhound"
+                    ]
+                })
+
+                const data = reactive({
+                    type:"品种",
+                    subTypeList: originData.breedList,
+                    subType: "Basenji"
+                })
+
+                const result = reactive({
+
+                })
+
+                watch(()=> data.type, (newValue, oldValue) => {
+                    if(data.type == "品种") {
+                        data.subTypeList = breedList
+                    } else {
+                        data.subTypeList = numberList
+                    }
+                })
+
+                return {
+                    originData,
+                    data
+                }
+            }
+        }).mount("#app")
+
+
+
+    </script>
+</body>
+</html>
