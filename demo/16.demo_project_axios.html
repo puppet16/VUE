@@ -8,29 +8,29 @@
 </head>
 <body>
     <div id="app">
-        <select v-model="data.type">
+        <select v-model="data.type" style="width: 100px;">
             <option v-for="(item,index) in originData.typeList" :value="item">{{item}}</option>
         </select>
 
-        <select v-model="data.subType">
-            <option v-for="(item,index) in originData.subTypeList" :value="item">{{item}}</option>
-
+        <select v-model="data.subType" style="width: 200px;">
+            <option v-for="(item,index) in data.subTypeList" :value="item">{{item}}</option>
         </select>
         
+        <hr>
         <!-- 列表展示 -->
-        <!-- <ul>
-            <li v-for="(value,index) in data.list">
-                {{index}}   {{value}}  <button @click="del(index)">删除</button>
+         <ul>
+            <li v-for="(value,index) in result.list">
+                <img style="display: block;" :src="value">
+                <span style="display: block;">{{index}}   {{value}}</span>
             </li>
-        </ul> -->
+        </ul>
         
     </div>
     <script type="module">
-        import {createApp, reactive, watch} from "./js/vue.esm-browser.js"
+        import {createApp, reactive, watch, watchEffect} from "./js/vue.esm-browser.js"
         createApp({
             setup() {
                 const originData = reactive({
-                    url:"",
                     typeList: [
                         "品种",
                         "数量"
@@ -40,35 +40,86 @@
                         1,2,3,4,5
                     ],
                     breedList:[
-                        "Basenji",
-                        "Dingo",
-                        "Doberman",
-                        "Great Dane",
-                        "Norwegian Elkhound"
+                        "basenji",
+                        "dingo",
+                        "doberman",
+                        "shiba",
+                        "tervuren"
                     ]
                 })
 
                 const data = reactive({
+                    url:"",
                     type:"品种",
-                    subTypeList: originData.breedList,
-                    subType: "Basenji"
+                    subTypeList: [],
+                    subType: ""
                 })
+
 
                 const result = reactive({
-
+                    list:[]
                 })
 
-                watch(()=> data.type, (newValue, oldValue) => {
-                    if(data.type == "品种") {
-                        data.subTypeList = breedList
+
+                watch(() => data.type, (newValue, oldValue) => {
+                    if(newValue == "品种") {
+                        data.subTypeList = originData.breedList
+                        data.subType = originData.breedList[0]
+                        data.url = `https://dog.ceo/api/breed/${data.subType}/images/random`
+                        console.log("type 选择品种", data.url);
                     } else {
-                        data.subTypeList = numberList
+                        data.subTypeList = originData.numberList
+                        data.subType = originData.numberList[0]
+                        data.url = `https://dog.ceo/api/breed/hound/images/random/${data.subType}`
+                        console.log("type 选择数量", data.url);
                     }
                 })
 
+
+                watch(() => data.subType, (newValue, oldValue) => {
+                    if(data.type == "品种") {
+                        data.url = `https://dog.ceo/api/breed/${newValue}/images/random`
+                        console.log("subType 选择品种", data.url);
+                    } else {
+                        data.url = `https://dog.ceo/api/breed/hound/images/random/${newValue}`
+                        console.log("subType 选择数量", data.url);
+                    }
+
+                    fetch()
+                })
+
+                data.subTypeList = originData.breedList
+                data.subType = originData.breedList[0]
+
+
+                const fetch = () => {
+                    axios.get(data.url).then(response => {
+                        console.log("get.data",  response.data);
+                        if(response.data.status == "success") {
+                            // 接口请求成功
+                            if (data.type == "品种") {
+                                // 品种接口，message返回字符串
+                                result.list.splice(0, result.list.length, response.data.message);
+                            } else {
+                                // 数量接口，message返回字符串数组
+                                result.list.splice(0, result.list.length)
+                                response.data.message.forEach(value => {
+                                    result.list.push(value)
+                                });
+                            }
+                            console.log("接口请求的数据处理", result.list);
+                        }
+                    }).catch(error => {
+                        console.log("get.error", error);
+                    }).finally(() => {
+                        console.log("get.finally");
+                    })
+                }
+
                 return {
                     originData,
-                    data
+                    data,
+                    result
                 }
             }
         }).mount("#app")
