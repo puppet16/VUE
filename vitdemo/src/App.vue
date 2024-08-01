@@ -1,11 +1,12 @@
 <script setup>
- import Header from './components/header.vue';
- import Footer from './components/footer.vue';
+// import FatherToChildrenData from './components/fatherToChildrenData.vue';
 </script>
 
 <template>
-<Header></Header>
-<Footer/>
+    <!-- 父传子 属性 -->
+<!-- <FatherToChildrenData></FatherToChildrenData> -->
+
+ <!--  -->
 </template>
 
 <style scoped>
