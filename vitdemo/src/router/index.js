@@ -4,10 +4,20 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
     {
         path:"/",
+        // 定义别名，都可以跳转到对应页面
+        alias:"/home",
         component: () => import("@/views/index.vue")
     },
     {
         path:"/content",
+        // 定义多个别名
+        alias:["/cont","/con"],
+        component: () => import("../views/content.vue")
+    },
+    {
+        path:"/user/:id/:title",
+        // 定义路径名称
+        name:"member",
         component: () => import("../views/content.vue")
     },
     {
