@@ -10,6 +10,10 @@ const routes = [
         path:"/content",
         component: () => import("../views/content.vue")
     },
+    {
+        path:"/user/:id?/:name", // 使用路径传参数
+        component: () => import("../views/user.vue")
+    },
 ]
 
 const router = createRouter({
